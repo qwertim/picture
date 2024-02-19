@@ -1,10 +1,28 @@
 <?php
-//初始化随机数生成器种子，这行代码也可以删除
-$seed = time();
-//获取随机数
-$num = rand(1,1);
-//拼接图片地址
-$picpath = "https://qwertim.github.io/"$.num.".webp";
-//重定位到图片
-die(header("Location: $picpath"));
+$filename = "img.txt";
+if(!file_exists($filename)){
+    die('文件不存在');
+}
+ 
+$pics = [];
+$fs = fopen($filename, "r");
+while(!feof($fs)){
+    $line=trim(fgets($fs));
+    if($line!=''){
+        array_push($pics, $line);
+    }
+}
+ 
+$pic = $pics[array_rand($pics)];
+ 
+$type=$_GET['type'];
+switch($type){
+ 
+case 'json':
+    header('Content-type:text/json');
+    die(json_encode(['pic'=>$pic]));
+ 
+default:
+    die(header("Location: $pic"));
+}
 ?>
