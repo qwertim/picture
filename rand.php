@@ -4,7 +4,7 @@ $seed = time();
 //获取随机数
 $num = rand(1,1);
 //拼接图片地址
-$picpath = "https://raw.githubusercontent.com/qwertim/picture/main/".$num.".webp";
+$picpath = "https://qwertim.github.io/"$.num".webp";
 //重定位到图片
 die(header("Location: $picpath"));
 ?>
